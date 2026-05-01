@@ -10,7 +10,7 @@ warnings.filterwarnings('ignore')
 
 # Dataset: https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
 # 284,807 transactions, 492 fraud (0.17%)
-df = pd.read_csv('creditcard.csv')
+df = pd.read_csv('data/creditcard.csv')
 
 print(f"Shape: {df.shape}")
 print(f"Fraud: {df['Class'].sum()} cases ({df['Class'].mean()*100:.3f}%)")
