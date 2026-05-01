@@ -10,10 +10,10 @@ Standard accuracy is useless here. A model that predicts "not fraud" every singl
 
 Kaggle's Credit Card Fraud Detection dataset: 284,807 transactions, 492 fraud cases (0.17%).
 
-Get the data:
+## Get the data
 
 ```bash
-# one-time setup: put kaggle.json in ~/.kaggle/ (kaggle.com > Account > API > Create New Token)
+# one-time setup: put kaggle.json in ~/.kaggle/ (kaggle.com > Account > Settings > API > Create New Token)
 pip install kaggle
 python data/download.py
 ```
@@ -24,7 +24,7 @@ This downloads `creditcard.csv` into the `data/` folder. File is ~150MB so it's 
 
 - **Baseline** - XGBoost with no resampling, just to see how bad it is
 - **SMOTE** - oversample the minority class
-- **class_weight='balanced'** - let the model penalize misclassifying fraud more
+- **class_weight** - let the model penalize misclassifying fraud more heavily
 - **Threshold tuning** - train normally, then shift the decision boundary
 
 Early result: SMOTE helped recall but killed precision. Threshold tuning on a cost-sensitive model is looking more promising.
@@ -33,8 +33,28 @@ Early result: SMOTE helped recall but killed precision. Threshold tuning on a co
 
 ```bash
 pip install -r requirements.txt
-python data/download.py   # first time only
-python fraud_detection.py
+python data/download.py       # first time only
+python fraud_detection.py     # train all models and compare
+```
+
+## Notebook
+
+For the full EDA and step-by-step analysis: [`notebooks/eda.ipynb`](notebooks/eda.ipynb)
+
+```bash
+jupyter notebook notebooks/eda.ipynb
+```
+
+## Files
+
+```
+data/
+  download.py         # fetches creditcard.csv from Kaggle
+  creditcard.csv      # ~150MB, gitignored
+notebooks/
+  eda.ipynb           # EDA and modeling walkthrough
+fraud_detection.py    # main script: trains all models and compares
+requirements.txt
 ```
 
 ## Stack
