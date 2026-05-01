@@ -10,6 +10,16 @@ Standard accuracy is useless here. A model that predicts "not fraud" every singl
 
 Kaggle's Credit Card Fraud Detection dataset: 284,807 transactions, 492 fraud cases (0.17%).
 
+Get the data:
+
+```bash
+# one-time setup: put kaggle.json in ~/.kaggle/ (kaggle.com > Account > API > Create New Token)
+pip install kaggle
+python data/download.py
+```
+
+This downloads `creditcard.csv` into the `data/` folder. File is ~150MB so it's excluded from git.
+
 ## What I'm comparing
 
 - **Baseline** - XGBoost with no resampling, just to see how bad it is
@@ -19,20 +29,14 @@ Kaggle's Credit Card Fraud Detection dataset: 284,807 transactions, 492 fraud ca
 
 Early result: SMOTE helped recall but killed precision. Threshold tuning on a cost-sensitive model is looking more promising.
 
-## Files
+## Run it
 
-```
-notebooks/
-  01_eda.ipynb          # data exploration, class imbalance viz
-  02_baseline.ipynb     # plain XGBoost
-  03_smote.ipynb        # SMOTE + XGBoost
-  04_threshold.ipynb    # threshold optimization
-src/
-  preprocess.py
-  evaluate.py           # precision-recall curves, confusion matrix
-requirements.txt
+```bash
+pip install -r requirements.txt
+python data/download.py   # first time only
+python fraud_detection.py
 ```
 
 ## Stack
 
-Python · pandas · scikit-learn · XGBoost · imbalanced-learn · matplotlib
+Python - pandas - scikit-learn - XGBoost - imbalanced-learn - matplotlib
